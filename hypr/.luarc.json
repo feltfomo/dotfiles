@@ -1,6 +1,6 @@
 {
   "workspace": {
-    "library": ["/usr/share/hypr/stubs"]
+    "library": ["/home/feltfomo/.local/share/lua-stubs/hyprland"]
   },
   "diagnostics": {
     "globals": ["hl"]
