@@ -20,9 +20,3 @@ elseif hostname == "khion" then
         scale = "1",
     })
 end
-
-hl.on("monitor.added", function(m)
-    if hostname == "khion" and m.name == "DP-2" then
-        hl.exec_cmd("hyprctl keyword monitor DP-2,2560x1440@180,2560x0,1")
-    end
-end)
