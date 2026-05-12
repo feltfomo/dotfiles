@@ -4,21 +4,24 @@ hl.bind(Mod .. " + SPACE", hl.dsp.exec_cmd(Menu))
 
 -- Window Binds
 hl.bind(Mod .. " + Q", hl.dsp.window.close())
+hl.bind(Mod .. " + V", hl.dsp.window.float())
+hl.bind(Mod .. " + F", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle", }))
+hl.bind(Mod .. " + SHIFT + F", hl.dsp.window.fullscreen({ "fullscreen", "toggle", }))
+hl.bind(Mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
+hl.bind(Mod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 
--- Window Focus Binds
-hl.bind(Mod .. " + right", hl.dsp.focus({ direction = "right" }))
-hl.bind(Mod .. " + left", hl.dsp.focus({ direction = "left" }))
-hl.bind(Mod .. " + up", hl.dsp.focus({ direction = "up" }))
-hl.bind(Mod .. " + down", hl.dsp.focus({ direction = "down" }))
--- (vim bindings)
-hl.bind(Mod .. " + l", hl.dsp.focus({ direction = "right" }))
-hl.bind(Mod .. " + h", hl.dsp.focus({ direction = "left" }))
-hl.bind(Mod .. " + k", hl.dsp.focus({ direction = "up" }))
-hl.bind(Mod .. " + j", hl.dsp.focus({ direction = "down" }))
+for dir, keys in pairs(Directions) do
+    -- focus
+    hl.bind(Mod .. " + " .. keys.arrow, hl.dsp.focus({ direction = dir }))
+    hl.bind(Mod .. " + " .. keys.vim, hl.dsp.focus({ direction = dir }))
+    -- move
+    hl.bind(ModAlt .. " + " .. keys.arrow, hl.dsp.window.move({ direction = dir }))
+    hl.bind(ModAlt .. " + " .. keys.vim, hl.dsp.window.move({ direction = dir }))
+end
 
 -- Monitor Focus Binds
-hl.bind(Mod .. " + ALT + h", hl.dsp.focus({ monitor = "DP-1" }))
-hl.bind(Mod .. " + ALT + l", hl.dsp.focus({ monitor = "DP-2" }))
+hl.bind(Mod .. " + SHIFT + h", hl.dsp.focus({ monitor = "DP-1" }))
+hl.bind(Mod .. " + SHIFT + l", hl.dsp.focus({ monitor = "DP-2" }))
 
 -- Log Out Bind
 hl.bind(Mod .. " + M",
@@ -37,7 +40,7 @@ else
 end
 
 -- layout switcher submap
-hl.bind(Mod .. " + L", hl.dsp.submap("layout"))
+hl.bind(Mod .. " + SHIFT + L", hl.dsp.submap("layout"))
 
 hl.define_submap("layout", function()
     local layouts = { d = "dwindle", m = "master", s = "scrolling", o = "monocle" }
