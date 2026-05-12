@@ -7,7 +7,7 @@ hl.env("QT_QPA_PLATFORM", "wayland;xcb")
 hl.env("GDK_BACKEND", "wayland,x11,*")
 hl.env("NIXOS_OZONE_WL", "1")
 
--- nvidia only (khion)
+-- nvidia only
 if hostname == "khion" then
     hl.env("LIBVA_DRIVER_NAME", "nvidia")
     hl.env("GBM_BACKEND", "nvidia-drm")
