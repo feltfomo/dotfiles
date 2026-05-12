@@ -1,3 +1,5 @@
+Mod         = "SUPER"
+Menu        = "fuzzel"
 Terminal    = "kitty"
 FileManager = "dolphin"
-Menu        = "fuzzel"
+HostName    = io.popen("hostname"):read("*l")
