@@ -25,39 +25,12 @@ hl.bind(Mod .. " + M",
 
 -- Switch workspaces with mainMod + [0-9]
 if HostName == "khion" then
-    local monitor_offsets = {
-        ["DP-1"] = 0,
-        ["DP-2"] = 10,
-    }
-
-    local function ws_offset()
-        local ws = hl.get_active_workspace()
-        if ws and ws.monitor then
-            return monitor_offsets[ws.monitor.name] or 0
-        end
-        return 0
-    end
-
+    local workspace = require("helpers/workspace")
+    for i = 1, 10 do workspace.bind_workspace(i) end
+else
     for i = 1, 10 do
         local key = tostring(i % 10)
-
-        hl.bind(Mod .. " + " .. key, function()
-            hl.dispatch(hl.dsp.focus({ workspace = i + ws_offset() }))
-        end)
-
-        -- dont follow window to workspace
-        hl.bind(Mod .. " + SHIFT + " .. key, function()
-            local ws = hl.get_active_workspace()
-            local current = ws and ws.id or 1
-            hl.dispatch(hl.dsp.window.move({ workspace = i + ws_offset() }))
-            hl.dispatch(hl.dsp.focus({ workspace = current }))
-        end)
-
-        -- follow window to workspace
-        hl.bind(Mod .. " + CTRL + " .. key, function()
-            local target = i + ws_offset()
-            hl.dispatch(hl.dsp.window.move({ workspace = target }))
-            hl.dispatch(hl.dsp.focus({ workspace = target }))
-        end)
+        hl.bind(Mod .. " + " .. key, hl.dsp.focus({ workspace = i }))
+        hl.bind(Mod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
     end
 end
