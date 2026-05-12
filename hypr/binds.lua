@@ -38,22 +38,16 @@ end
 
 -- layout switcher submap
 hl.bind(Mod .. " + L", hl.dsp.submap("layout"))
+
 hl.define_submap("layout", function()
-    hl.bind("d", function()
-        hl.config({ general = { layout = "dwindle" } })
-        hl.dispatch(hl.dsp.submap("reset"))
-    end)
-    hl.bind("m", function()
-        hl.config({ general = { layout = "master" } })
-        hl.dispatch(hl.dsp.submap("reset"))
-    end)
-    hl.bind("s", function()
-        hl.config({ general = { layout = "scrolling" } })
-        hl.dispatch(hl.dsp.submap("reset"))
-    end)
-    hl.bind("o", function()
-        hl.config({ general = { layout = "monocle" } })
-        hl.dispatch(hl.dsp.submap("reset"))
-    end)
+    local layouts = { d = "dwindle", m = "master", s = "scrolling", o = "monocle" }
+
+    for key, layout in pairs(layouts) do
+        hl.bind(key, function()
+            hl.config({ general = { layout = layout } })
+            hl.dispatch(hl.dsp.submap("reset"))
+        end)
+    end
+
     hl.bind("Escape", hl.dsp.submap("reset"))
 end)
