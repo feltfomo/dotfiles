@@ -1,6 +1,6 @@
 -- App Binds
 hl.bind(Mod .. " + T", hl.dsp.exec_cmd(Terminal))
-hl.bind(Mod .. " + R", hl.dsp.exec_cmd(Menu))
+hl.bind(Mod .. " + SPACE", hl.dsp.exec_cmd(Menu))
 
 -- Window Binds
 hl.bind(Mod .. " + Q", hl.dsp.window.close())
@@ -20,6 +20,7 @@ hl.bind(Mod .. " + j", hl.dsp.focus({ direction = "down" }))
 hl.bind(Mod .. " + ALT + h", hl.dsp.focus({ monitor = "DP-1" }))
 hl.bind(Mod .. " + ALT + l", hl.dsp.focus({ monitor = "DP-2" }))
 
+-- Log Out Bind
 hl.bind(Mod .. " + M",
     hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 
@@ -34,3 +35,25 @@ else
         hl.bind(Mod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
     end
 end
+
+-- layout switcher submap
+hl.bind(Mod .. " + L", hl.dsp.submap("layout"))
+hl.define_submap("layout", function()
+    hl.bind("d", function()
+        hl.config({ general = { layout = "dwindle" } })
+        hl.dispatch(hl.dsp.submap("reset"))
+    end)
+    hl.bind("m", function()
+        hl.config({ general = { layout = "master" } })
+        hl.dispatch(hl.dsp.submap("reset"))
+    end)
+    hl.bind("s", function()
+        hl.config({ general = { layout = "scrolling" } })
+        hl.dispatch(hl.dsp.submap("reset"))
+    end)
+    hl.bind("o", function()
+        hl.config({ general = { layout = "monocle" } })
+        hl.dispatch(hl.dsp.submap("reset"))
+    end)
+    hl.bind("Escape", hl.dsp.submap("reset"))
+end)
