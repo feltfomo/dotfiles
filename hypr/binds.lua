@@ -1,6 +1,7 @@
 -- App Binds
 hl.bind(Mod .. " + T", hl.dsp.exec_cmd(Terminal))
 hl.bind(Mod .. " + SPACE", hl.dsp.exec_cmd(Menu))
+hl.bind("Print", hl.dsp.exec_cmd(ScreenShot))
 
 -- Window Binds
 hl.bind(Mod .. " + Q", hl.dsp.window.close())
